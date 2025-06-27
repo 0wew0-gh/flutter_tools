@@ -1,81 +1,16 @@
-# flutte tools
+# we_tools
 
-自用 Flutter 工具
+A new Flutter project.
 
-## 跨页面实时通知
+## Getting Started
 
-复制文件[notificationCenter.dart](notificationCenter.dart)到项目目录下。
+This project is a starting point for a Flutter application.
 
-### 订阅
+A few resources to get you started if this is your first Flutter project:
 
-```dart
-NotificationCenter.instance.addObserver(
-  'postName',
-  (object) {
-  print(object);
-  },
-);
-```
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-### 发布
-
-```dart
-NotificationCenter.instance.postNotification(
-  'postName',
-  true,
-);
-```
-
-### 取消订阅
-
-```dart
-NotificationCenter.instance.removeNotification('postName');
-```
-
-## 仿支付宝扫码的覆盖层
-
-扫码包 [mobile_scanner](https://pub-web.flutter-io.cn/packages/mobile_scanner) 的覆盖层。
-
-### 初始化`mobile_scanner`
-
-```dart
-final MobileScannerController controller = MobileScannerController(
-  cameraResolution: size,
-  detectionSpeed: detectionSpeed,
-  detectionTimeoutMs: detectionTimeout,
-  formats: selectedFormats,
-  returnImage: returnImage,
-  torchEnabled: true,
-  invertImage: invertImage,
-  autoZoom: autoZoom,
-);
-```
-
-### 加入覆盖层
-
-复制文件[we_barcode_overlay.dart](we_barcode_overlay.dart) 到项目目录下。
-
-```dart
-Stack(
-  children: [
-    SizedBox(
-      height: 100.h,
-      child: MobileScanner(
-        controller: controller
-        fit: boxFit,
-      ),
-    ),
-    if (controller != null)
-      WeBarcodeOverlay(
-        controller: controller!,
-        nowBarcode: scannerString,
-        onClick: (barcode) {
-          if (barcode == null) {
-            return;
-          }
-          handleBarcoe(barcode);
-        },
-      ),
-  ],
-)
-```
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
