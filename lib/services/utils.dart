@@ -1,10 +1,22 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:we_tools/global.dart';
 import 'package:we_tools/i18n/mytranslate.dart';
+
+Future<String> init() async {
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  Global.i.packageInfo = [
+    packageInfo.version,
+    packageInfo.buildNumber,
+    packageInfo.packageName,
+    packageInfo.appName,
+  ];
+  return "${Global.i.packageInfo[0]} (${Global.i.packageInfo[1]})";
+}
 
 /// 设置语言
 Future<void> setLocale(

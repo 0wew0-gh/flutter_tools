@@ -27,7 +27,11 @@ Map<String, dynamic> en = {
     "copy": "Copy",
     "useSystem": "Open with browser",
   },
-  "list": {"title": "Tool List", "qrcodeScan": "QR code scanning"},
+  "list": {
+    "title": "Tool List",
+    "qrcodeScan": "QR code scanning",
+    "qrcodeGenerate": "QR code generation",
+  },
   "qrcode": {
     "wifi": {
       "title": "Wi-Fi",
@@ -38,6 +42,11 @@ Map<String, dynamic> en = {
     "copySuccess": "Copy successful",
     "copyPassword": "Copy password",
     "copyPWSuccess": "Copy password successful",
+    "useImage": "Use image",
+    "selectImage": "Select image",
+    "save": "Save image",
+    "saveSuccess": "Save successful",
+    "saveError": "Save failed",
   },
   "Error": {
     "open": "Unable to open URL:",

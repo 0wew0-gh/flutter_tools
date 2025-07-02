@@ -1,10 +1,9 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sizer/sizer.dart';
-import 'package:we_tools/global.dart';
 import 'package:we_tools/i18n/mytranslate.dart';
+import 'package:we_tools/page/qrcode.dart';
 import 'package:we_tools/page/scanner.dart';
 import 'package:we_tools/page/setting_list.dart';
 import 'package:we_tools/page/tools_list.dart';
@@ -25,7 +24,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: tt('app'),
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF673AB7)),
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color(0xFF673AB7),
+            ),
           ),
           builder: BotToastInit(),
           // 删掉右上角的DEBUG
@@ -34,8 +35,9 @@ class MyApp extends StatelessWidget {
           initialRoute: "root",
           routes: {
             "list": (context) => ToolsListPage(),
-            "scanner": (context) => ScannerPage(),
             "setting": (context) => SettingListPage(),
+            "scanner": (context) => ScannerPage(),
+            "qrcode": (context) => QRCodePage(),
           },
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en', ''), Locale('zh', 'CN')],
-          home: const MyHomePage(),
+          home: const ToolsListPage(),
         );
       },
     );
@@ -62,23 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    init();
+    init().then(
+      (val) => setState(() {
+        version = val;
+      }),
+    );
     super.initState();
-  }
-
-  void init() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    Global.i.packageInfo = [
-      packageInfo.version,
-      packageInfo.buildNumber,
-      packageInfo.packageName,
-      packageInfo.appName,
-    ];
-    version = "${Global.i.packageInfo[0]} (${Global.i.packageInfo[1]})";
-    getLanguageID();
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   @override

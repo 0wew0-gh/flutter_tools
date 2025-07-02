@@ -81,7 +81,7 @@ class _SettingListPageState extends State<SettingListPage> {
                                 style: TextStyle(fontSize: 16.sp),
                               ),
                               onTap: () => setLocale(true, "").then((value) {
-                                if (!mounted) {
+                                if (!context.mounted) {
                                   return;
                                 }
                                 Navigator.pop(context);
@@ -98,7 +98,7 @@ class _SettingListPageState extends State<SettingListPage> {
                               ),
                               onTap: () =>
                                   setLocale(false, "zh-CN").then((value) {
-                                    if (!mounted) {
+                                    if (!context.mounted) {
                                       return;
                                     }
                                     Navigator.pop(context);
@@ -120,7 +120,7 @@ class _SettingListPageState extends State<SettingListPage> {
                                 style: TextStyle(fontSize: 16.sp),
                               ),
                               onTap: () => setLocale(false, "en").then((value) {
-                                if (!mounted) {
+                                if (!context.mounted) {
                                   return;
                                 }
                                 Navigator.pop(context);
@@ -136,7 +136,7 @@ class _SettingListPageState extends State<SettingListPage> {
                                 style: TextStyle(fontSize: 16.sp),
                               ),
                               onTap: () => setLocale(false, "es").then((value) {
-                                if (!mounted) {
+                                if (!context.mounted) {
                                   return;
                                 }
                                 Navigator.pop(context);
