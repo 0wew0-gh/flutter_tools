@@ -3,25 +3,29 @@ setlocal
 
 set "source=build\app\outputs\flutter-apk\app-release.apk"
 
-set "targetDir=C:\Users\wangyi\Downloads"
+@REM set "targetDir=C:\Users\wangyi\Downloads"
+set "shareDir=D:\share\weTools"
 
 set "verson=%~1"
 set "buildNumber=%~2"
 
 
-if not exist "%targetDir%" (
-    mkdir "%targetDir%"
+@REM if not exist "%targetDir%" (
+@REM     mkdir "%targetDir%"
+@REM )
+
+if not exist "%shareDir%" (
+    mkdir "%shareDir%"
 )
 
 call flutter build apk
-explorer C:\Users\wangyi\Downloads
 
 if "%~2"=="" (
     set "newName=%verson%"
 ) else (
     set "newName=%verson%(%buildNumber%)"
 )
-copy "%source%" "%targetDir%\we Tools v%newName%.apk" >nul
+copy "%source%" "%shareDir%\we Tools v%newName%.apk" >nul
 
 if errorlevel 1 (
     echo copy failed
@@ -31,6 +35,14 @@ if errorlevel 1 (
 )
 
 call flutter build aab
-start .\build\app\outputs\bundle\release
+copy ".\build\app\outputs\bundle\release\app-release.aab" "%shareDir%\app-release.aab" >nul
+@REM 打开文件夹
+explorer "%shareDir%"
+@REM 打开命令行
+@REM start "%shareDir%"
+
+
+@REM 打开aab文件夹 
+@REM start .\build\app\outputs\bundle\release
 
 endlocal
